@@ -1,4 +1,4 @@
-### Upwork Scraper
+# Upwork Scraper
 
 Upwork Scraper is an [Apify actor](https://apify.com/actors) for extracting data from [Upwork](https://www.upwork.com/). It allows you to extract info from freelancers and agencies without login. It is build on top of [Apify SDK](https://sdk.apify.com/) and you can run it both on [Apify platform](https://my.apify.com) and locally.
 
@@ -7,7 +7,7 @@ Upwork Scraper is an [Apify actor](https://apify.com/actors) for extracting data
 - [Compute units consumption](#compute-units-consumption)
 - [Extend output function](#extend-output-function)
 
-### Input
+## Input
 
 | Field | Type | Description | Default value
 | ----- | ---- | ----------- | -------------|
@@ -21,18 +21,16 @@ Upwork Scraper is an [Apify actor](https://apify.com/actors) for extracting data
 | extendOutputFunction | string | A Javascript function passed as plain text that can return custom information. More on [Extend output function](#extend-output-function). | |
 | proxy | object | Proxy configuration of the run. | `{"useApifyProxy": true }`|
 
-#### Suported startUrls
+### Suported startUrls
 
-- www.upwork.com/hire/*
-- www.upwork.com/search/profiles/*
-- www.upwork.com/search/o/profiles/users/*
-- www.upwork.com/search/fl/*
+- <www.upwork.com/hire/>*
+- <www.upwork.com/search/profiles/>*
+- <www.upwork.com/search/o/profiles/users/>*
+- <www.upwork.com/search/fl/>*
 
+## Output
 
-### Output
-
-Output is stored in a dataset. 
-
+Output is stored in a dataset.
 
 ```json
 {
@@ -62,23 +60,23 @@ Output is stored in a dataset.
 }
 ```
 
-### Compute units consumption
+## Compute units consumption
 
 Estimated ~0.06 CU per 100 requests
 
-### Extend output function
+## Extend output function
 
 You can use this function to update the result output of this actor. You can choose what data from the page you want to scrape. The output from this will function will get merged with the result output.
 
 The return value of this function has to be an object!
 
 You can return fields to achive 3 different things:
+
 - Add a new field - Return object with a field that is not in the result output
 - Change a field - Return an existing field with a new value
 - Remove a field - Return an existing field with a value `undefined`
 
-
-```js
+```javascript
 async () => {
   return {
         pageTitle: document.querySelecto('title').innerText,
@@ -119,7 +117,7 @@ This example will add the title of the page to the final object:
 
 Upwork stores the full data of the frelancer in a javascript variable. You can access that variable to get more information from the freelancer profile. The code bellow adds the full profile variable to the output. You can use the extended output function to extract only the data that you need.
 
-```js
+```javascript
 async () => {
     return { profileResponse: window.PROFILE_RESPONSE }
 }
